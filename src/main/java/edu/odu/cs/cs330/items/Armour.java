@@ -47,6 +47,14 @@ public class Armour extends Item {
     public Armour()
     {
         // Initialize all data members (including those inherited from Item)
+        this.name = "";
+        this.durability = 0;
+        this.defense = 0;
+        this.material = "";
+        this.modifier = "";
+        this.modiferLevel = 0;
+        this.element = "";
+        super.stackable = false;
     }
 
     /**
@@ -57,6 +65,14 @@ public class Armour extends Item {
     public Armour(Armour src)
     {
         // Set and/or copy data members for *this* object based on *src*.
+        this.name = src.name;
+        this.durability = src.durability;
+        this.defense = src.defense;
+        this.material = src.material;
+        this.modifier = src.modifier;
+        this.modiferLevel = src.modiferLevel;
+        this.element = src.element;
+        super.stackable = false;
     }
 
     /**
@@ -184,14 +200,20 @@ public class Armour extends Item {
     }
 
     /**
-     * Read Armour attributes.
+     * Read Armour attributes. (set the attributes based on input text)
      */
     @Override
     public void read(Scanner snr)
     {
+        // "Fancy Vibranium 9001 62 ProcrastinationReduction 999999 H20"
+        // a name, material, durability, defense, modifier, modifier level, and element
         super.name   = snr.next();
-
-        // Complete this method
+        this.material = snr.next();
+        this.durability = snr.nextInt();
+        this.defense = snr.nextInt();
+        this.modifier = snr.next();
+        this.modiferLevel = snr.nextInt();
+        this.element = snr.next();
     }
 
     /**
@@ -200,8 +222,8 @@ public class Armour extends Item {
     @Override
     public Item clone()
     {
-        // Replace the next line
-        return null;
+        Armour cloned = new Armour(this);
+        return cloned;
     }
 
     /**
@@ -210,8 +232,25 @@ public class Armour extends Item {
     @Override
     public String toString()
     {
-        return "Implement This Function";
+        return String.format(
+            "  Nme: %s%n" +
+            "  Dur: %d%n" +
+            "  Def: %d%n" +
+            "  Mtl: %s%n" +
+            "  Mdr: %s (Lvl %d)%n" +
+            "  Emt: %s%n", this.name, this.durability, this.defense, this.material, this.modifier, this.modiferLevel, this.element
+        );
     }
+
+    /*
+     * Example string:
+     *  Nme: Boots
+        Dur: 100
+        Def: 10
+        Mtl: Diamond
+        Mdr: Protection (Lvl 3)
+        Emt: lightning
+     */
 }
 
 
